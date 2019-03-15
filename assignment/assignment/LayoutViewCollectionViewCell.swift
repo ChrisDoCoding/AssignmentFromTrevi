@@ -25,7 +25,9 @@ class LayoutViewCollectionViewCell: UICollectionViewCell {
         contentSubview.backgroundColor = .white
         contentView.addSubview(contentSubview)
         
-        initialCell()
+        backgroundColor = .white
+        randomLabel.isHidden = true
+        addContentViewConstraints()
         addContentSubviews()
     }
     

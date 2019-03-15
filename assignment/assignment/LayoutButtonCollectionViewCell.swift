@@ -23,7 +23,7 @@ class LayoutButtonCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(contentBackgroundView)
         
         // contentSubview
-        contentSubview.backgroundColor = UIColor(displayP3Red: 0.188, green: 0.188, blue: 0.188, alpha: 1.0)
+        contentSubview.backgroundColor = UIColor.theme.darkGray
         contentView.addSubview(contentSubview)
         
         contentBackgroundView.snp.makeConstraints { (make) in
@@ -35,9 +35,9 @@ class LayoutButtonCollectionViewCell: UICollectionViewCell {
         
         contentSubview.snp.makeConstraints { (make) in
             make.top.equalTo(contentBackgroundView.snp.top).offset(5)
-            make.bottom.equalTo(contentView.snp.bottom)
-            make.leading.equalTo(contentView.snp.leading)
-            make.trailing.equalTo(contentView.snp.trailing)
+            make.bottom.equalTo(contentBackgroundView.snp.bottom)
+            make.leading.equalTo(contentBackgroundView.snp.leading)
+            make.trailing.equalTo(contentBackgroundView.snp.trailing)
         }
         
         addContentSubviews()
@@ -51,13 +51,12 @@ class LayoutButtonCollectionViewCell: UICollectionViewCell {
 
     func initialCell() {
         backgroundColor = .white
-        aButton.backgroundColor = UIColor(displayP3Red: 0.188, green: 0.188, blue: 0.188, alpha: 1.0)
+        aButton.backgroundColor = UIColor.theme.darkGray
         aButton.removeTarget(nil, action: nil, for: .allEvents)
     }
     
     func addContentSubviews() {
         // aButton
-        aButton.backgroundColor = UIColor(displayP3Red: 0.188, green: 0.188, blue: 0.188, alpha: 1.0)
         aButton.layer.cornerRadius = 5
         aButton.layer.borderColor = UIColor.white.cgColor
         aButton.layer.borderWidth = 2

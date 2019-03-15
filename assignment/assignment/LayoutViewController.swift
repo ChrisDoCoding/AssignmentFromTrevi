@@ -66,13 +66,13 @@ class LayoutViewController: UIViewController {
             if #available(iOS 11, *) {
                 make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
                 make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-                make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset
-                make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset
+                make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading)
+                make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing)
             } else {
                 make.top.equalToSuperview()
                 make.bottom.equalToSuperview()
-                make.leading.equalToSuperview().offset
-                make.trailing.equalToSuperview().offset
+                make.leading.equalToSuperview()
+                make.trailing.equalToSuperview()
             }
         }
         
@@ -100,17 +100,17 @@ class LayoutViewController: UIViewController {
     }
     
     @objc func reloadView() {
+        // initial view
         selectedIndex = nil
         collectionView.reloadData()
     }
 }
 
-
 extension LayoutViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         guard let rowsCount = rowsCount else {
-            return 1
+            return 0
         }
         return rowsCount + 1
     }
@@ -132,11 +132,11 @@ extension LayoutViewController: UICollectionViewDataSource, UICollectionViewDele
                 
                 let x = indexPath.section % 2
                 if x == 0 {
-                    cell.upView.backgroundColor = UIColor(displayP3Red: 0.969, green: 0.914, blue: 0.914, alpha: 1.0)
-                    cell.downView.backgroundColor = UIColor(displayP3Red: 0.722, green: 0.165, blue: 0.176, alpha: 1.0)
+                    cell.upView.backgroundColor = UIColor.theme.lightPink
+                    cell.downView.backgroundColor = UIColor.theme.pink
                 } else if x == 1 {
-                    cell.upView.backgroundColor = UIColor(displayP3Red: 0.906, green: 0.957, blue: 0.902, alpha: 1.0)
-                    cell.downView.backgroundColor = UIColor(displayP3Red: 0.125, green: 0.620, blue: 0.122, alpha: 1.0)
+                    cell.upView.backgroundColor = UIColor.theme.lightGreen
+                    cell.downView.backgroundColor = UIColor.theme.green
                 }
                 
                 if let selectedIndex = selectedIndex {
@@ -145,7 +145,7 @@ extension LayoutViewController: UICollectionViewDataSource, UICollectionViewDele
                     }
 
                     if indexPath.row == selectedIndex.row {
-                        cell.backgroundColor = UIColor(displayP3Red: 0.180, green: 0.827, blue: 0.831, alpha: 1.0)
+                        cell.backgroundColor = UIColor.theme.highlightGreen
                     }
                 }
                 
@@ -155,12 +155,12 @@ extension LayoutViewController: UICollectionViewDataSource, UICollectionViewDele
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: layoutButtonCell, for: indexPath) as? LayoutButtonCollectionViewCell {
                 
                 cell.initialCell()
-                cell.aButton.setTitle("Button", for: .normal)
+                cell.aButton.setTitle("確認", for: .normal)
                 
                 if let selectedIndex = selectedIndex {
                     if indexPath.row == selectedIndex.row {
-                        cell.aButton.backgroundColor = UIColor(displayP3Red: 0.180, green: 0.827, blue: 0.831, alpha: 1.0)
-                        cell.backgroundColor = UIColor(displayP3Red: 0.180, green: 0.827, blue: 0.831, alpha: 1.0)
+                        cell.aButton.backgroundColor = UIColor.theme.highlightGreen
+                        cell.backgroundColor = UIColor.theme.highlightGreen
                         cell.aButton.addTarget(self, action: #selector(reloadView), for: .touchUpInside)
                     }
                 }
@@ -170,3 +170,5 @@ extension LayoutViewController: UICollectionViewDataSource, UICollectionViewDele
         return UICollectionViewCell()
     }
 }
+
+
